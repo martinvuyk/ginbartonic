@@ -15,4 +15,6 @@ func Setup(router *gin.Engine) {
 	tonic.SetErrorHook(conventions.ErrHook)
 	endp := Endpoints{}
 	router.GET("hello/:name", tonic.Handler(endp.greeting, 200))
+	router.GET("trainer/pokemonlist", tonic.Handler(endp.pokemonList, 200))
+	router.GET("pokemon/characteristics", tonic.Handler(endp.characteristics, 200))
 }

@@ -2,13 +2,14 @@
 
 # Happy Coding!
 
-
 ### Endpoints:
-base_url/docs       -> swagger docs
+
+base_url/hello/:name -> greeting GET Endpoint
+base_url/docs -> swagger docs (not yet implemented)
 
 ### Deployment:
 
--download the folder<br /> 
+-download the folder<br />
 -put a .env file inside with the following fields:<br />
 SQL_ENGINE=<br />
 SQL_DATABASE=<br />
@@ -19,10 +20,10 @@ SQL_PORT=<br />
 SERVER_PORT=4599<br />
 GIN_MODE=release|debug<br />
 
+-in a terminal, write: "docker compose up"<br />
 
--in a terminal, write:  "docker compose up"<br />
 #### Requirements:
--docker
 
+-docker
 
 #### Built with the GinBarTonic REST Framework (github.com/martinvuyk/ginbartonic)
