@@ -61,6 +61,7 @@ Every endpoint has to return an established ApiResponse struct, adapted to the d
 - develop: freely alterable example use of the framework, changes are welcome and encouraged, always trying to keep everything functional through basic smoketests. Override and edit as you see fit.
 
 #### Guidelines:
+
 - When making a pull request to alfa, keep the changes as small as possible for each request
 - Comment your intentions when altering something that was already functional
 - Type safety is a must, no use putting interface{} in every return type, if we wanted that we wouldn't use Go in the first place
