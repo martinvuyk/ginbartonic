@@ -7,6 +7,6 @@ import (
 	"src/api/v1/views/conventions"
 )
 
-func (*Endpoints) characteristics(c *gin.Context, in *pokemon.PokemonCharactInput) (conventions.ApiResponse[pokemon.PokemonCharactOutput], error) {
+func (*endpoints) characteristics(c *gin.Context, in *pokemon.PokemonCharactInput) (conventions.ApiResponse[pokemon.PokemonCharactOutput], error) {
 	return conventions.Respond(c, in, pokemon.Characteristics, 200)
 }
