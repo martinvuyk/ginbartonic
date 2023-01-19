@@ -21,5 +21,8 @@ As such, the data definitions remain in one file, the database Model definition 
 The current attempt tries to generalize the basic functions in order for the Framework user to be able to recycle them and avoiding code redundancy but mantaining type safety
 
 #### Error handling
-Error handling is managed with the help of another project called tonic which was forked in (github.com/martinvuyk/gadgeto/tree/master/tonic), which facilitates using hooks such as validators, and error handlers, as well as the routes themselves. The communication of errors between the controller and the endpoint must be through the juju errors package (github.com/juju/errors).
+Error handling is managed with the help of another project called tonic which was forked in (github.com/martinvuyk/gadgeto/tree/master/tonic), which facilitates using hooks such as validators, and error handlers, as well as the routes themselves. 
+
+The communication of errors between the controller and the endpoint must be through the juju errors package (github.com/juju/errors).
+
 Every endpoint has to return an established ApiResponse struct, adapted to the data each endpoint's output establishes through use of Type Generics
