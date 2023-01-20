@@ -7,7 +7,7 @@ import (
 	juju "github.com/juju/errors"
 )
 
-func Controller(c *gin.Context, in *GreetUserInput) (*GreetUserOutput, error) {
+func GreetAnyone(c *gin.Context, in *GreetUserInput) (*GreetUserOutput, error) {
 	if in.Name == "satan" {
 		return nil, juju.NewForbidden(nil, "go to hell")
 	}

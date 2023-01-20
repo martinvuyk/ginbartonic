@@ -1,6 +1,8 @@
 package conventions
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,5 +17,6 @@ type Handler struct{}
 
 func Respond[T any, A any](c *gin.Context, in *T, handler func(*gin.Context, *T) (*A, error), code int) (ApiResponse[A], error) {
 	resp, err := handler(c, in)
+	fmt.Println(err)
 	return ApiResponse[A]{Success: true, Code: uint(code), Data: resp}, err
 }

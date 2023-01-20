@@ -8,5 +8,5 @@ import (
 )
 
 func (*endpoints) greeting(c *gin.Context, in *greeting.GreetUserInput) (conventions.ApiResponse[greeting.GreetUserOutput], error) {
-	return conventions.Respond(c, in, greeting.Controller, 200)
+	return conventions.Respond(c, in, greeting.GreetAnyone, 200)
 }

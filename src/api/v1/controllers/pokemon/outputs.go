@@ -1,3 +1,7 @@
 package pokemon
 
-type PokemonCharactOutput struct{}
+type PokemonCharactOutput struct {
+	name    string
+	species string
+	types   string
+}

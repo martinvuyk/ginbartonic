@@ -1,3 +1,5 @@
 package pokemon
 
-type PokemonCharactInput struct{}
+type PokemonCharactInput struct {
+	ID int `path:"id" description:"Pokemon ID" validate:"required"`
+}

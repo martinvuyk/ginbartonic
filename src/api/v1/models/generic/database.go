@@ -22,6 +22,6 @@ type DbAspect struct {
 	gorm.Model
 	InterDataAspect `gorm:"embedded"`
 }
-type DbInterface interface {
-	Get_data_repr() DataAspect
+type DbAspectInterface[T any] interface {
+	Get_data_repr() *T
 }
