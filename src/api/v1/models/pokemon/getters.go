@@ -12,9 +12,9 @@ package pokemon
 // 	return relationships, nil
 // }
 
-// func (pokemon *PokemonDB) Get_data_repr() *Pokemon {
-// 	return &pokemon.Pokemon.Pokemon
-// }
+func (pokemon *PokemonDB) Get_data_repr() *Pokemon {
+	return &pokemon.DataAspect
+}
 
 // func GetByID(id uint) (*Pokemon, error) {
 // 	return generic.GetByID[Pokemon, *PokemonDB](id)

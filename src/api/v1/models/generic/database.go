@@ -18,11 +18,12 @@ type InterDataAspect[T any] struct {
 }
 
 // struct for establishing a DB Model
-type DbAspect[T any] struct {
+type DbAspect[T any, A any] struct {
 	gorm.Model
 	InterDataAspect[T] `gorm:"embedded"`
 }
-type DbAspectInterf[T any, A any] struct {
-	DbAspect[T]
-	// Get_data_repr() *T
-}
+
+// type DbAspectInterf[T any, A any] interface {
+// 	*DbAspect[T, A]
+// 	Get_data_repr() *T
+// }

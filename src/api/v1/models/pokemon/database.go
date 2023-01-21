@@ -16,5 +16,5 @@ type pokemon struct {
 }
 
 type PokemonDB struct {
-	generic.DbAspect[Pokemon] `gorm:"embeded"`
+	generic.DbAspect[Pokemon, PokemonDB] `gorm:"embeded"`
 }
