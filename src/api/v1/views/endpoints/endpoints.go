@@ -16,5 +16,5 @@ func Setup(router *gin.Engine) {
 	endp := endpoints{}
 	router.GET("hello/:name", tonic.Handler(endp.greeting, 200))
 	router.GET("trainer/pokemonlist", tonic.Handler(endp.pokemonList, 200))
-	router.GET("pokemon/:id", tonic.Handler(endp.characteristics, 200))
+	router.GET("pokemon/:id", tonic.Handler(endp.getPokemonById, 200))
 }

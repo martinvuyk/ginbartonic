@@ -7,6 +7,6 @@ import (
 	"src/api/v1/views/conventions"
 )
 
-func (*endpoints) pokemonList(c *gin.Context, in *trainer.PokemonListInput) (conventions.ApiResponse[trainer.PokemonListOutput], error) {
+func (*endpoints) pokemonList(c *gin.Context, in *trainer.PokemonListInput) (*conventions.ApiResponse[trainer.PokemonListOutput], error) {
 	return conventions.Respond(c, in, trainer.PokemonList, 200)
 }

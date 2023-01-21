@@ -8,13 +8,13 @@ import (
 )
 
 func getCharacteristics(id int) (*PokemonCharactOutput, error) {
-	poke, lookupErr := pokemon.GetByID(uint(id))
-	data, parsingErr := generic.Copy[PokemonCharactOutput](poke)
+	poke, lookupErr := generic.GetByID[pokemon.Pokemon](pokemon.PokemonDB{}, uint(id))
+	data, parsingErr := generic.FromTo[pokemon.Pokemon, PokemonCharactOutput](poke)
 	if lookupErr != nil {
 		return nil, juju.NewNotFound(lookupErr, "pokemon not found in the database")
 	}
 	if parsingErr != nil {
 		return nil, juju.NewNotFound(parsingErr, "data was not parsable")
 	}
-	return &data, nil
+	return data, nil
 }

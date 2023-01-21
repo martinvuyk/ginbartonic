@@ -12,16 +12,17 @@ type RelationshipsInterf interface {
 
 // struct for overriding fields and adding tags or anything
 // the DB library requires before ingestion into DB Model
-type InterDataAspect struct {
-	DataAspect    `gorm:"embedded"`
+type InterDataAspect[T any] struct {
+	DataAspect    T `gorm:"embedded"`
 	Relationships `gorm:"embedded"`
 }
 
 // struct for establishing a DB Model
-type DbAspect struct {
+type DbAspect[T any] struct {
 	gorm.Model
-	InterDataAspect `gorm:"embedded"`
+	InterDataAspect[T] `gorm:"embedded"`
 }
-type DbAspectInterface[T any] interface {
-	Get_data_repr() *T
+type DbAspectInterf[T any, A any] struct {
+	DbAspect[T]
+	// Get_data_repr() *T
 }
