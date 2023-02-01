@@ -3,10 +3,19 @@ package endpoints
 import (
 	"github.com/gin-gonic/gin"
 
-	"src/api/v1/controllers/trainer"
+	controller "src/api/v1/controllers/trainer"
 	"src/api/v1/views/conventions"
 )
 
-func (*endpoints) pokemonList(c *gin.Context, in *trainer.PokemonListInput) (*conventions.ApiResponse[trainer.PokemonListOutput], error) {
-	return conventions.Respond(c, in, trainer.PokemonList, 200)
+type trainerType struct{}
+
+var trainer = trainerType{}
+
+// endpoint to get a list of pokemon which the trainer owns
+func (*trainerType) getPokemonList(c *gin.Context, in *controller.PokemonListInput) (*conventions.ApiResponse[controller.PokemonListOutput], error) {
+	return conventions.Respond(c, in, controller.PokemonList, 200)
+}
+
+func (*trainerType) setup(router *gin.Engine) {
+	register(router.GET, "trainer/pokemonlist", trainer.getPokemonList, 200)
 }

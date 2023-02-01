@@ -8,13 +8,21 @@ import (
 	"github.com/martinvuyk/gadgeto/tonic"
 )
 
-type endpoints struct{}
+type routerFuncType interface {
+	func(relativePath string, handlers ...gin.HandlerFunc) gin.IRoutes
+}
+
+func register[T, A any, RT routerFuncType](routerFunc RT, url string, handler func(*gin.Context, T) (A, error), code int) {
+	routerFunc(url, tonic.Handler(handler, code))
+}
 
 func Setup(router *gin.Engine) {
 	// Readme for tonic in https://github.com/martinvuyk/gadgeto/tree/master/tonic
 	tonic.SetErrorHook(conventions.ErrHook)
-	endp := endpoints{}
-	router.GET("hello/:name", tonic.Handler(endp.greeting, 200))
-	router.GET("trainer/pokemonlist", tonic.Handler(endp.pokemonList, 200))
-	router.GET("pokemon/:id", tonic.Handler(endp.getPokemonById, 200))
+
+	// setup endpoints
+
+	greeting.setup(router)
+	trainer.setup(router)
+	pokemon.setup(router)
 }
