@@ -6,6 +6,9 @@ import (
 	"src/api/v1/views/conventions"
 
 	"github.com/martinvuyk/gadgeto/tonic"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 type routerFuncType interface {
@@ -25,4 +28,8 @@ func Setup(router *gin.Engine) {
 	greeting.setup(router)
 	trainer.setup(router)
 	pokemon.setup(router)
+
+	// setup docs
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 }
