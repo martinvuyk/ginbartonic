@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"src/api/v1/views/conventions"
+	"src/controller"
 
 	"github.com/martinvuyk/gadgeto/tonic"
 
@@ -19,17 +20,17 @@ func register[T, A any, RT routerFuncType](routerFunc RT, url string, handler fu
 	routerFunc(url, tonic.Handler(handler, code))
 }
 
-func Setup(router *gin.Engine) {
+func Setup(router *gin.RouterGroup) {
 	// Readme for tonic in https://github.com/martinvuyk/gadgeto/tree/master/tonic
 	tonic.SetErrorHook(conventions.ErrHook)
 
 	// setup endpoints
-
 	greeting.setup(router)
 	trainer.setup(router)
 	pokemon.setup(router)
 
+	c := controller.Controller{}
+	router.GET("/trying", c.TryingSomethingOut)
 	// setup docs
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 }

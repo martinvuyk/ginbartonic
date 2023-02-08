@@ -7,10 +7,10 @@ RUN go mod download
 
 COPY . .
 
-RUN go install github.com/swaggo/swag/cmd/swag@latest
+RUN go install github.com/swaggo/swag/cmd/swag@v1.8
 RUN swag init
  
 RUN go build -v -o /target-executable
 
-FROM golang:1.19-alpine as deploy_stage
-COPY --from=build_stage /target-executable $GOPATH/src/docs /
+# FROM golang:1.19-alpine as deploy_stage
+# COPY --from=build_stage /target-executable $GOPATH/src/docs /

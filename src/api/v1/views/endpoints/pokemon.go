@@ -15,7 +15,7 @@ func (*pokemonType) getPokemonById(c *gin.Context, in *controller.PokemonCharact
 	return conventions.Respond(c, in, controller.GetPokemonById, 200)
 }
 
-func (*pokemonType) setup(router *gin.Engine) {
+func (*pokemonType) setup(router *gin.RouterGroup) {
 	// endpoint to get charachteristics of a pokemon searching by id
 	register(router.GET, "pokemon/:id", pokemon.getPokemonById, 200)
 }

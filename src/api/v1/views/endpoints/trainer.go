@@ -16,6 +16,6 @@ func (*trainerType) getPokemonList(c *gin.Context, in *controller.PokemonListInp
 	return conventions.Respond(c, in, controller.PokemonList, 200)
 }
 
-func (*trainerType) setup(router *gin.Engine) {
+func (*trainerType) setup(router *gin.RouterGroup) {
 	register(router.GET, "trainer/pokemonlist", trainer.getPokemonList, 200)
 }
