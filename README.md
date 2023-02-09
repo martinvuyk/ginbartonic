@@ -8,9 +8,9 @@ The idea of this Framework is to allow any developer to quickly setup an API tha
 <!-- - [ ] Stuff -->
 
 - [ ] Get our own cute Go Gopher bartender with a gintonic in a plate
-- [ ] Make the Data Abstraction layer work
+- [x] Make the Data Abstraction layer work
 - [ ] Build a CLI tool for installation of the FW
-- [ ] Check, update, and fork any dependencies in tonic that have fewer than 1000 dependents
+- [x] Check, update, and fork any dependencies in tonic that have fewer than 1000 dependents
 - [ ] Setup CI/CD, smoketest for develop branch, regression tests for alfa
 
 #### Database handling

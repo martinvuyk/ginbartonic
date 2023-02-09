@@ -1,12 +1,9 @@
 package generic
 
 // data repr of the model that will remain the same regardless of which DB library is used
-type DataAspect[T any] struct{}
-
-// func getDbAspectFromType[T any]() *DbAspect[T] {
-// 	dbAspect := DbAspect[T]{}
-// 	return &dbAspect
-// }
+type DataAspect[T any] struct {
+	ID uint
+}
 
 // interface to enable a generic method for json parsing
 type JsonRepresentations[T any] interface{}

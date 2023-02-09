@@ -7,7 +7,7 @@ import (
 )
 
 // transforms the DBAspect of an instance into its DataAspect
-func (dbAspect *DbAspect[T, A]) Get_data_repr() *T {
+func (dbAspect *DbAspect[T, A]) GetDataRepr() *T {
 	return &dbAspect.DataAspect
 }
 
@@ -27,15 +27,5 @@ func GetByID[T any, A any](table A, id uint) (*T, error) {
 	if err != nil {
 		return nil, err
 	}
-	return resultVar.Get_data_repr(), nil
+	return resultVar.GetDataRepr(), nil
 }
-
-// finds and returns the instances in the DB that have a relationship to the current one
-// func (data *DataAspect) Get_relationships() (Relationships, error) {
-// 	var relationships Relationships
-// 	search := searchBy(&relationships, &data.ID)
-// 	if err := search.Error; err != nil {
-// 		return Relationships{}, err
-// 	}
-// 	return relationships, nil
-// }
