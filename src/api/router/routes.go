@@ -11,7 +11,7 @@ func getRouters() []*gin.Engine {
 	// Routes API v1
 	routerV1 := gin.New()
 	routerV1.Use(gin.Recovery())
-	v1.Setup(routerV1)
+	v1.Setup(routerV1.Group("/api/v1"))
 
 	routers := []*gin.Engine{routerV1}
 	return routers

@@ -6,24 +6,17 @@ import (
 	"github.com/jinzhu/copier"
 )
 
-func copy[T JsonRepresentations](input *DataAspect) T {
-	var jsonRepr T
-	copier.Copy(&jsonRepr, &input)
-	return jsonRepr
+func FromTo[T any, A any](input *T) (*A, error) {
+	var dataRepr A
+	err := copier.Copy(&dataRepr, input)
+	return &dataRepr, err
 }
 
-func (data *DataAspect) AsJson1() JsonRepr1 {
-	return copy[JsonRepr1](data)
-}
-func (data *DataAspect) AsJson2() JsonRepr2 {
-	return copy[JsonRepr2](data)
-}
-
-func FromJson[T JsonRepresentations](input []byte) (T, error) {
-	var jsonRepr T
+func FromJsonTo[T any, A JsonRepresentations[T]](input []byte) (*A, error) {
+	var jsonRepr A
 	err := json.Unmarshal(input, &jsonRepr)
 	if err != nil {
-		return jsonRepr, err
+		return nil, err
 	}
-	return jsonRepr, nil
+	return &jsonRepr, nil
 }

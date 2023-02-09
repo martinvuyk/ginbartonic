@@ -1,27 +1,31 @@
 package generic
 
 import (
-	"gorm.io/gorm"
-
 	"src/api/v1/models"
+
+	juju "github.com/juju/errors"
 )
 
 // transforms the DBAspect of an instance into its DataAspect
-func (thing *DbAspect) Get_data_repr() DataAspect {
-	return thing.InterDataAspect.DataAspect
+func (dbAspect *DbAspect[T, A]) GetDataRepr() *T {
+	return &dbAspect.DataAspect
 }
 
 // search in the DB and return
-func searchBy(resultVar any, fieldValue any) *gorm.DB {
-	return models.Database.Model(&DbAspect{}).First(&resultVar, fieldValue)
+func getFirst[T any, A any](table A, resultVar *DbAspect[T, A], fieldValue any) error {
+	result := models.Database.Model(table).First(resultVar, fieldValue)
+	if result.RowsAffected == 0 {
+		return juju.NotFound
+	}
+	return result.Error
 }
 
-// finds and returns the instances in the DB that have a relationship to the current one
-func (data *DataAspect) Get_relationships() (Relationships, error) {
-	var relationships Relationships
-	search := searchBy(&relationships, &data.ID)
-	if err := search.Error; err != nil {
-		return Relationships{}, err
+// TODO: when the language supports it, enable A as DbAspectInterf[T]
+func GetByID[T any, A any](table A, id uint) (*T, error) {
+	var resultVar DbAspect[T, A]
+	err := getFirst(table, &resultVar, id)
+	if err != nil {
+		return nil, err
 	}
-	return relationships, nil
+	return resultVar.GetDataRepr(), nil
 }
