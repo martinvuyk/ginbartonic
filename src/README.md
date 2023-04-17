@@ -18,8 +18,9 @@
   SQL_HOST=db<br />
   SQL_PORT=<br />
   SERVER_PORT=4599<br />
+  MONITORING_PORT=4788<br />
   GIN_MODE=release|debug<br />
-- in a terminal, write: "docker compose up"
+- in a terminal, write: "docker compose up --build"
 
 #### Requirements:
 
