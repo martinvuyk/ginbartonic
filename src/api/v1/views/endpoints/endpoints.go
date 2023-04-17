@@ -21,6 +21,7 @@ func Setup(router *gin.RouterGroup) {
 	tonic.SetErrorHook(conventions.ErrHook)
 
 	// setup endpoints
+	// generic.Setup(router)
 	greeting.Setup(router)
 	trainer.Setup(router)
 	pokemon.Setup(router)
