@@ -6,6 +6,6 @@ import (
 )
 
 func Setup(router *gin.RouterGroup) {
-	pokL := getPokemonList
+	pokL := getPokeList
 	router.GET("trainer/pokemonlist", pokL.docs, tonic.Handler(pokL.handler, pokL.OkCode))
 }

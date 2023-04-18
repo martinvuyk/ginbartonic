@@ -14,22 +14,26 @@ import (
 )
 
 // struct to establish relations to other DB Models following the DB library structure
-type Relationships struct{}
+type relationships struct{}
 
 // struct for overriding fields and adding tags or anything
 // the DB library requires before ingestion into DB Model
-type InterDataAspect[T any] struct {
+type interDataAspect[T any] struct {
 	DataAspect    T `gorm:"embedded"`
-	Relationships `gorm:"embedded"`
+	relationships `gorm:"embedded"`
 }
 
 // struct for establishing a DB Model
-type DbAspect[T any, A any] struct {
+type DbAspect[T any] struct {
 	gorm.Model
-	InterDataAspect[T] `gorm:"embedded"`
 }
 
-type DbAspectInterf[T any, A any] interface {
-	DbAspect[T, A]
-	GetDataRepr() *T
+type DbAspectInterf[T any] interface {
+	GetDataRepr() (T, error)
+}
+
+type exampleTable[T any] struct {
+	DbAspect[T]
+	interDataAspect[T] `gorm:"embedded"`
+	DbAspectInterf[T]
 }

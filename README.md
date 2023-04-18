@@ -1,4 +1,4 @@
-# [GinBarTonic REST Framework](https://github.com/martinvuyk/ginbartonic) - The Bartender that only serves Gin Tonic
+# [GinBarTonic MVC REST Framework](https://github.com/martinvuyk/ginbartonic) - The Bartender that only serves Gin Tonic
 
 This will be a Gin REST MVC Framework with connection to a DB, automated deployment, and auto docs<br />
 The idea of this Framework is to allow any developer to quickly setup an API that is scalable but also quick to develop with, and flexible enough for future readjustments that would otherwise be painful

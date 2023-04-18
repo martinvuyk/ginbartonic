@@ -11,7 +11,6 @@ package generic
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/martinvuyk/gadgeto/tonic"
 )
 
 type endpointInterface[T, A any] interface {
@@ -34,9 +33,7 @@ type input = *any
 type output = *any
 
 // the real handler for the request, to be wrapped in tonic.Handler
-func (*exampleEndpoint) handler(*gin.Context, input) (output, error) { return nil, nil }
-
-func Setup(router *gin.RouterGroup) {
-	exmp := exampleEndpoint{}
-	router.GET("example", exmp.docs, tonic.Handler(exmp.handler, exmp.OkCode))
+func (e *exampleEndpoint) handler(c *gin.Context, in input) (output, error) {
+	// return conventions.Respond(c, in, controller, e.OkCode)
+	return nil, nil
 }
