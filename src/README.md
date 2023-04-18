@@ -4,8 +4,7 @@
 
 ### Endpoints:
 
-- base_url/hello/:name -> greeting GET Endpoint
-- base_url/swagger/index.html -> swagger docs (in development)
+- host:port/api/v1/swagger/index.html -> swagger docs
 
 ### Deployment:
 
@@ -26,4 +25,4 @@
 
 -docker
 
-#### Built with the GinBarTonic REST Framework (github.com/martinvuyk/ginbartonic)
+#### Built with the [GinBarTonic REST Framework](github.com/martinvuyk/ginbartonic)

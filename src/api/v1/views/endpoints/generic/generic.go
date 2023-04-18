@@ -33,4 +33,7 @@ type input = *any
 type output = *any
 
 // the real handler for the request, to be wrapped in tonic.Handler
-func (exampleEndpoint) handler(*gin.Context, input) (output, error) { return nil, nil }
+func (e *exampleEndpoint) handler(c *gin.Context, in input) (output, error) {
+	// return conventions.Respond(c, in, controller, e.OkCode)
+	return nil, nil
+}
