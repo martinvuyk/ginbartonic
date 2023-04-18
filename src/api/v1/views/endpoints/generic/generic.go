@@ -27,7 +27,7 @@ type exampleEndpoint struct {
 }
 
 // gin.HandlerFunc with docstrings in format for github.com/swaggo/swag/cmd/swag
-func (exampleEndpoint) docs(*gin.Context) {}
+func (*exampleEndpoint) docs(*gin.Context) {}
 
 type input = *any
 type output = *any
