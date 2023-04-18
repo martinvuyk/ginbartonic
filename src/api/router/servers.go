@@ -32,22 +32,6 @@ func getServer(port string, handler http.Handler) *http.Server {
 	}
 }
 
-func router02() http.Handler {
-	e := gin.New()
-	e.Use(gin.Recovery())
-	e.GET("/", func(c *gin.Context) {
-		c.JSON(
-			http.StatusOK,
-			gin.H{
-				"code":    http.StatusOK,
-				"message": "Welcome server 02",
-			},
-		)
-	})
-
-	return e
-}
-
 // Initialize servers
 func Serve() {
 	endpoints := getRouters()
