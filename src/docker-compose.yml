@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  api:
+  server:
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -9,10 +9,19 @@ services:
       sh -c "/target-executable"
     ports:
       - "${SERVER_PORT:-4599}:${SERVER_PORT:-4599}"
+      - "${MONITORING_PORT:-4788}:${MONITORING_PORT:-4788}"
     env_file:
       - .env
     depends_on:
       - db
+  prometheus:
+    image: prom/prometheus:v2.40.4
+    ports:
+      - 9090:9090
+    volumes:
+      - ./api/router/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - server
   db:
     image: postgres:12-alpine
     restart: always

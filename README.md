@@ -1,4 +1,4 @@
-# [GinBarTonic REST Framework](https://github.com/martinvuyk/ginbartonic) - The Bartender that only serves Gin Tonic
+# [GinBarTonic MVC REST Framework](https://github.com/martinvuyk/ginbartonic) - The Bartender that only serves Gin Tonic
 
 This will be a Gin REST MVC Framework with connection to a DB, automated deployment, and auto docs<br />
 The idea of this Framework is to allow any developer to quickly setup an API that is scalable but also quick to develop with, and flexible enough for future readjustments that would otherwise be painful
@@ -35,6 +35,25 @@ Every endpoint has to return an established ApiResponse struct, adapted to the d
 
 #### Branches:
 
+- main: only releases and readme updates through pull requests
+
+- alfa: regression tested deployable abstract framework, edits through pull requests
+
+- develop: freely alterable example use of the framework, changes are welcome and encouraged, always trying to keep everything functional through basic smoketests. Override and edit as you see fit.
+
+#### Guidelines:
+
+- When making a pull request to alfa, keep the changes as small as possible for each request
+- Comment your intentions when altering something that was already functional
+- Type safety is a must, no use putting interface{} in every return type, if we wanted that we wouldn't use Go in the first place
+- Don't download a library to add 2+2 but also don't reinvent the wheel
+- Keep flexibility in mind when adding any functionality or dependency
+- Start small: build a use case for your idea, then try to generalize from there. If you can't, leave the example there and commit the code with comments explaining what you were trying to do
+- When you have interesting ideas, leave them in a "// TODO:" comment!!!
+
+## Contributing
+
+#### Branches:
 - main: only releases and readme updates through pull requests
 
 - alfa: regression tested deployable abstract framework, edits through pull requests

@@ -5,6 +5,8 @@ import (
 
 	"src/api/v1/views/conventions"
 
+	"src/api/v1/views/endpoints/examples"
+
 	"github.com/martinvuyk/gadgeto/tonic"
 
 	swaggerFiles "github.com/swaggo/files"
@@ -17,6 +19,7 @@ func Setup(router *gin.RouterGroup) {
 	tonic.SetErrorHook(conventions.ErrHook)
 
 	// setup endpoints
+	examples.Setup(router)
 
 	// setup docs
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

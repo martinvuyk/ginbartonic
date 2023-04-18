@@ -1,3 +1,12 @@
+// Copyright [2023] [Martin Vuyk]
+// https://github.com/martinvuyk/ginbartonic
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// 	http://www.apache.org/licenses/LICENSE-2.0
+
 package conventions
 
 import (
@@ -29,17 +38,23 @@ func ErrHook(c *gin.Context, e error) (int, any) {
 		errcode = 400
 	} else {
 		switch {
-		case are(e, []error{juju.BadRequest, juju.NotValid, juju.AlreadyExists, juju.NotSupported, juju.NotAssigned, juju.NotProvisioned}):
+		case are(e, []error{juju.BadRequest, juju.NotAssigned}):
 			errcode = 400
 		case is(e, juju.Unauthorized):
 			errcode = 401
 		case is(e, juju.Forbidden):
 			errcode = 403
-		case are(e, []error{juju.NotFound, juju.UserNotFound}):
+		case are(e, []error{juju.NotFound, juju.UserNotFound, juju.NotProvisioned}):
 			errcode = 404
-		case is(e, juju.MethodNotAllowed):
+		case are(e, []error{juju.MethodNotAllowed}):
 			errcode = 405
-		case is(e, juju.NotImplemented):
+		case is(e, juju.AlreadyExists):
+			errcode = 409
+		case is(e, juju.NotSupported):
+			errcode = 415
+		case is(e, juju.NotValid):
+			errcode = 418
+		case are(e, []error{juju.NotImplemented, juju.NotYetAvailable}):
 			errcode = 501
 		}
 	}
