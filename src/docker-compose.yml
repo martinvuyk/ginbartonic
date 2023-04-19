@@ -22,6 +22,18 @@ services:
       - ./api/router/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
       - server
+  grafana:
+    image: grafana/grafana:9.3.0
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=devops123
+    volumes:
+      - ./api/router/monitoring/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - grafana:/var/lib/grafana
+    depends_on:
+      - prometheus
   db:
     image: postgres:12-alpine
     restart: always
@@ -37,4 +49,5 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 volumes:
+  grafana:
   postgres_data:

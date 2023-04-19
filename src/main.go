@@ -2,7 +2,7 @@ package main
 
 import (
 	"src/api"
-	"src/api/router"
+	"src/api/networking"
 
 	_ "src/docs"
 )
@@ -24,5 +24,5 @@ func main() {
 
 	api.Init()
 
-	router.Serve()
+	networking.Serve()
 }

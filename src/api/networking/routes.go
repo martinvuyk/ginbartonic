@@ -1,9 +1,9 @@
-package router
+package networking
 
 import (
 	"github.com/gin-gonic/gin"
 
-	"src/api/router/monitoring"
+	"src/api/networking/monitoring"
 	v1 "src/api/v1/views/endpoints"
 )
 

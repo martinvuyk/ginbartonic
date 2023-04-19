@@ -1,7 +1,7 @@
 package monitoring
 
 import (
-	"src/api/router/monitoring/prometheus"
+	"src/api/networking/monitoring/prometheus"
 
 	"github.com/gin-gonic/gin"
 )
