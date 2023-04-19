@@ -31,6 +31,8 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=devops123
     volumes:
       - ./api/networking/monitoring/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./api/networking/monitoring/grafana/dashboards/provisioning/main.yml:/etc/grafana/provisioning/dashboards/main.yml
+      - ./api/networking/monitoring/grafana/dashboards/dashboards:/var/lib/grafana/dashboards
       - grafana:/var/lib/grafana
     depends_on:
       - prometheus
