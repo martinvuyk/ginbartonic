@@ -1,4 +1,4 @@
-package router
+package networking
 
 import (
 	"fmt"
@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"
 )
 
