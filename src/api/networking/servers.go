@@ -33,13 +33,13 @@ func getServer(port string, handler http.Handler) *http.Server {
 
 // Initialize servers
 func Serve() {
-	endpoints := getRouters()
+	endpoints := getRoutersV1()
 
 	port := getFromEnv("SERVER_PORT", "4599")
-	serverV1 := getServer(port, endpoints.api[0])
+	serverV1 := getServer(port, endpoints.api)
 
-	monitoring := getFromEnv("MONITORING_PORT", "4788")
-	serverMonitoring := getServer(monitoring, endpoints.metrics[0])
+	monitoringV1 := getFromEnv("MONITORING_PORT", "4788")
+	serverMonitoring := getServer(monitoringV1, endpoints.metrics)
 
 	g.Go(func() error {
 		return serverV1.ListenAndServe()

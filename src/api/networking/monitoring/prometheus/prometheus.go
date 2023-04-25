@@ -7,6 +7,9 @@ import (
 	// "net/http"
 
 	// "github.com/prometheus/client_golang/prometheus"
+	"net/http"
+
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"github.com/gin-gonic/gin"
@@ -43,8 +46,9 @@ import (
 
 // var dvs []Device
 
-func Setup(router *gin.RouterGroup) {
-	router.Any("/metrics", WrapHH(promhttp.Handler))
+func Setup(router *gin.RouterGroup, reg *prometheus.Registry) {
+	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{})
+	router.Any("/metrics", WrapHH(func() http.Handler { return promHandler }))
 
 	// reg := prometheus.NewRegistry()
 	// m := NewMetrics(reg)
