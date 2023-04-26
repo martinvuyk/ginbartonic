@@ -47,8 +47,10 @@ import (
 // var dvs []Device
 
 func Setup(router *gin.RouterGroup, reg *prometheus.Registry) {
+	router.Any("/metrics", WrapHH(promhttp.Handler))
+
 	promHandler := promhttp.HandlerFor(reg, promhttp.HandlerOpts{})
-	router.Any("/metrics", WrapHH(func() http.Handler { return promHandler }))
+	router.Any("/metrics/custom", WrapHH(func() http.Handler { return promHandler }))
 
 	// reg := prometheus.NewRegistry()
 	// m := NewMetrics(reg)
