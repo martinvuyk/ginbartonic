@@ -19,6 +19,7 @@ services:
     ports:
       - 9090:9090
     volumes:
+      - ./api/networking/monitoring/prometheus/tmp:/prometheus
       - ./api/networking/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
       - server
@@ -27,8 +28,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=devops123
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASS:-devops123}
     volumes:
       - ./api/networking/monitoring/grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
       - ./api/networking/monitoring/grafana/dashboards/provisioning/main.yml:/etc/grafana/provisioning/dashboards/main.yml
