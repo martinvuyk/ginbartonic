@@ -19,7 +19,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./api/networking/monitoring/prometheus/tmp:/prometheus
+      - prometheus:/prometheus
       - ./api/networking/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
       - api_service
@@ -39,18 +39,17 @@ services:
       - prometheus
   db:
     image: postgres:12-alpine
-    restart: always
     ports:
       - "5432:5432"
     env_file:
       - .env
     environment:
-      #environment variables, if not present :- default
       POSTGRES_USER: ${SQL_USER:-user}
       POSTGRES_PASSWORD: ${SQL_PASSWORD:-password}
       POSTGRES_DB: ${SQL_DATABASE:-postgres}
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 volumes:
+  prometheus:
   grafana:
   postgres_data:
