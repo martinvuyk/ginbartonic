@@ -26,6 +26,11 @@
 
 ### Deployment:
 
+CI pipeline:
+- run $ `docker build -t api_image_name:version_tag -f ./Dockerfile`
+- publish image to a container registry (public/private)
+
+CD pipeline:
 - create file k8s-secrets.yml and add postgres secret
 - $ `kubectl apply k8s-secrets.yml`
 - $ `kubectl apply k8s.yml`

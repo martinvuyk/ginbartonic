@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: api_container
-    image: api_image:latest
+    image: api_image_name:latest
     ports:
       - containerPort: 4599
         name: http-api

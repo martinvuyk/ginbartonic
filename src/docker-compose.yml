@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - db_service
   prometheus:
     image: prom/prometheus:v2.40.4
     ports:
