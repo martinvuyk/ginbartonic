@@ -9,9 +9,9 @@ spec:
   - name: api_container
     image: api_image:latest
     ports:
-      - containerPort: ${SERVER_PORT:-4599}
+      - containerPort: 4599
         name: http-api
-      - containerPort: ${MONITORING_PORT:-4788}
+      - containerPort: 4788
         name: http-metrics
 ---
 apiVersion: v1
@@ -48,4 +48,87 @@ spec:
       appProtocol: http
       protocol: TCP
       port: http-metrics
+---
+# # EXAMPLE SECRET for k8s-secrets.yml:
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: db-secret
+# type: Opaque
+# data:
+#   SQL_USER: asd_user
+#   SQL_PASSWORD: p4ss_asd
+#   SQL_DATABASE: asd_db
+# ---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db_pod
+  labels:
+    app: db_server
+spec:
+  containers:
+  - name: db_container
+    image: postgres:12-alpine
+    env:
+      - name: POSTGRES_USER
+        valueFrom: 
+          secretKeyRef:
+            name: db-secret
+            key: SQL_USER
+      - name: POSTGRES_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            name: db-secret
+            key: SQL_PASSWORD
+      - name: POSTGRES_DB
+        valueFrom: 
+          secretKeyRef:
+            name: db-secret
+            key: SQL_DATABASE
+    ports:
+      - containerPort: 5432
+        name: db_port
+    volumeMounts:
+      - name: postgres_data
+      mountPath: /var/lib/postgresql/data/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db_service
+spec:
+  type: ClusterIP
+  selector:
+    app: db_server
+  ports:
+    - name: db_port
+      protocol: TCP
+      port: db_port
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db_statefulset
+  labels:
+    app: db_server
+spec:
+  serviceName: db_service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db_server
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  volumeClaimTemplates:
+    - metadata:
+      name: postgresql-db-disk
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 25Gi
 ---
