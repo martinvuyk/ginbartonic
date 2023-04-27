@@ -56,9 +56,9 @@ spec:
 #   name: db-secret
 # type: Opaque
 # data:
-#   SQL_USER: asd_user
-#   SQL_PASSWORD: p4ss_asd
-#   SQL_DATABASE: asd_db
+#   SQL_USER: user
+#   SQL_PASSWORD: password
+#   SQL_DATABASE: postgres
 # ---
 apiVersion: v1
 kind: Pod
