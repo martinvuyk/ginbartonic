@@ -15,7 +15,7 @@
   SQL_DATABASE=postgres<br />
   SQL_USER=user<br />
   SQL_PASSWORD=password<br />
-  SQL_HOST=db<br />
+  SQL_HOST=db_service<br />
   SQL_PORT=5432<br />
   SERVER_PORT=4599<br />
   MONITORING_PORT=4788<br />

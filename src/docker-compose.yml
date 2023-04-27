@@ -37,7 +37,7 @@ services:
       - grafana:/var/lib/grafana
     depends_on:
       - prometheus
-  db:
+  db_service:
     image: postgres:12-alpine
     ports:
       - "5432:5432"
