@@ -13,13 +13,13 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-func Setup(router *gin.RouterGroup) {
+func Setup(router *gin.RouterGroup, m *conventions.Metrics) {
 	// Readme for tonic in https://github.com/martinvuyk/gadgeto/tree/master/tonic
 	// middleware and http error handler
 	tonic.SetErrorHook(conventions.ErrHook)
 
 	// setup endpoints
-	examples.Setup(router)
+	examples.Setup(router, m)
 
 	// setup docs
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

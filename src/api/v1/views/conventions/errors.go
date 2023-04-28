@@ -32,31 +32,36 @@ func are(baseError error, possibleErrors []error) bool {
 	return false
 }
 
-func ErrHook(c *gin.Context, e error) (int, any) {
-	errcode, errpl := 500, e.Error()
+func mapJujuError(e error) int {
+	err := 500
 	if _, ok := e.(tonic.BindError); ok {
-		errcode = 400
+		err = 400
 	} else {
 		switch {
 		case are(e, []error{juju.BadRequest, juju.NotAssigned}):
-			errcode = 400
+			err = 400
 		case is(e, juju.Unauthorized):
-			errcode = 401
+			err = 401
 		case is(e, juju.Forbidden):
-			errcode = 403
+			err = 403
 		case are(e, []error{juju.NotFound, juju.UserNotFound, juju.NotProvisioned}):
-			errcode = 404
+			err = 404
 		case are(e, []error{juju.MethodNotAllowed}):
-			errcode = 405
+			err = 405
 		case is(e, juju.AlreadyExists):
-			errcode = 409
+			err = 409
 		case is(e, juju.NotSupported):
-			errcode = 415
+			err = 415
 		case is(e, juju.NotValid):
-			errcode = 418
+			err = 418
 		case are(e, []error{juju.NotImplemented, juju.NotYetAvailable}):
-			errcode = 501
+			err = 501
 		}
 	}
+	return err
+}
+func ErrHook(c *gin.Context, e error) (int, any) {
+	errpl := e.Error()
+	errcode := mapJujuError(e)
 	return errcode, ApiResponse[any]{Success: false, Err: juju.ConstError(errpl), Code: uint(errcode)}
 }
