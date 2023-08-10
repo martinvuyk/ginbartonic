@@ -22,8 +22,9 @@ func getGreet(m *conventions.Metrics) getGreetType {
 // @Description	get greeting with name
 // @Tags		greeting
 // @Produce		json
+// @Param		name	path	string true "name"
 // @Success		200	{object}	getGreetOut
-// @Router		/hello/:name [get]
+// @Router		/hello/{name} [get]
 func (*getGreetType) docs(c *gin.Context) {}
 
 func (g *getGreetType) handler(c *gin.Context, in getGreetIn) (getGreetOut, error) {

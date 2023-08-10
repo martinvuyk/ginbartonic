@@ -75,7 +75,9 @@ func NewMetrics(reg prometheus.Registerer, version string) *Metrics {
 			// 4 times larger for apdex score
 			// Buckets: prometheus.ExponentialBuckets(0.1, 1.5, 5),
 			// Buckets: prometheus.LinearBuckets(0.1, 5, 5),
-			Buckets: []float64{0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.075, 0.1, 0.15, 0.2, 0.25, 0.3, 0.5, 0.75, 0.9, 1.1, 1.5},
+			Buckets: []float64{0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.075,
+				0.1, 0.15, 0.2, 0.25, 0.3, 0.5, 0.75, 0.9, 1.1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+				11, 12, 13, 14, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60},
 		}, []string{"endpoint", "status"}),
 	}
 	reg.MustRegister(m.duration)
